@@ -34,7 +34,8 @@ def main():
     termios.tcsetattr(fd,termios.TCSANOW,options)
 
     while  True:
-        print("Consumer :",end="")
+        message="Consumer :"
+        print(message,end="\r"+message)
 
         data=None
         message=None
