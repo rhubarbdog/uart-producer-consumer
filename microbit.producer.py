@@ -1,18 +1,17 @@
 #
 # Author Phil Hall
-# copyleft July 2018
+# July 2018 - Public Domain
 
 from microbit import *
 
-BUSY=[Image("00000:00000:00900:00000:00000:"),
-      Image.SQUARE_SMALL,
-      Image.SQUARE,
-      Image.SQUARE_SMALL]
-
-MENU=("Horse","Cat","Rabbit","This is a sentence of considerable length",
-      "mule")
+MENU=("Horse","Cat","Rabbit","This is a sentence.","Mule")
 
 menu=0
+
+PULSATE=( Image("00000:00000:00900:00000:00000:"),
+          Image.SQUARE_SMALL,
+          Image.SQUARE,
+          Image.SQUARE_SMALL )
 busy=0
 
 uart.init(baudrate=9600,bits=8,parity=None,tx=pin1,rx=pin0)
@@ -36,11 +35,10 @@ while True:
         break
 
 
-    display.show(BUSY[busy])
-
     rt=running_time()
     if rt<save_time or rt-save_time>200:
-        busy=(busy+1)%len(BUSY)
+        display.show(PULSATE[busy])
+        busy=(busy+1)%len(PULSATE)
         save_time=rt
 
 #

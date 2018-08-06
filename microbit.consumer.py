@@ -1,14 +1,28 @@
 #
 # Author Phil Hall
-# CopyLeft July 2018
+# July 2018 - Public Domain
 
 from microbit import *
+
 
 DELAY=50
 
 uart.init(baudrate=9600,bits=8,parity=None,tx=pin1,rx=pin0)
 
-clock=0
+SPINNER=( Image("00900:00000:00500:00000:00000"),
+          Image("00090:00000:00500:00000:00000"),
+          Image("00000:00009:00500:00000:00000"),
+          Image("00000:00000:00509:00000:00000"),
+          Image("00000:00000:00500:00009:00000"),
+          Image("00000:00000:00500:00000:00090"),
+          Image("00000:00000:00500:00000:00900"),
+          Image("00000:00000:00500:00000:09000"),
+          Image("00000:00000:00500:90000:00000"),
+          Image("00000:00000:90500:00000:00000"),
+          Image("00000:90000:00500:00000:00000"),
+          Image("09000:00000:00500:00000:00000") )
+
+busy=0
 save_time=running_time()
 while True:
 
@@ -34,15 +48,14 @@ while True:
     if message=='Exit' or button_b.is_pressed():
         break
         
-    if message==None:
-        display.show(Image.ALL_CLOCKS[clock])
-    else:
+    if message is not None:
         display.scroll('"'+message+'"')
-        clk=0
+
 
     rt=running_time()
     if rt<save_time or rt-save_time>=200:
-        clock=(clock+1)%len(Image.ALL_CLOCKS)
+        display.show(SPINNER[busy])
+        busy=(busy+1)%len(SPINNER)
         save_time=rt
 
 #

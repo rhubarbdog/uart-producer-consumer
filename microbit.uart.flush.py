@@ -1,5 +1,6 @@
 #
-# This is only test code do not use with waranty
+# Author Phil Hall
+# August 2018 - Public Domain
 
 from microbit import *
 
