@@ -1,6 +1,6 @@
 #
 # Author Phil Hall
-# CopyLeft July 2018
+# August 2018 - Public Domain
 
 import posix
 import termios

@@ -1,6 +1,6 @@
 #
 # Author Phil Hall
-# CopyLeft July 2018
+# August 2018 - Public Domain
 
 import posix
 import termios
@@ -41,6 +41,7 @@ def main():
         message=None
  
         while data is None:
+
             try:
                 data=bytearray(posix.read(fd,128))
             except:
@@ -50,7 +51,7 @@ def main():
             
             if message is not None and data is None:
                 break
-            
+
             if message is None:
                 message=data
             else:
@@ -58,10 +59,11 @@ def main():
                 
             time.sleep(DELAY)
 
+
         new=""
         for i in message:
             new+=chr(i)
-
+                    
         message=new
             
         print('"'+message+'"')
